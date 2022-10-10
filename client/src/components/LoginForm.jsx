@@ -10,13 +10,13 @@ const LoginForm = () => {
     }
 
     const handleLogin = () => {
-        navigate("/driver")
+        navigate("/dashboard")
     }
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
   <form>
     <div className="form-group mb-6">
-      <label for="exampleInputEmail2" className="form-label inline-block mb-2 text-gray-700">Email address</label>
+      <label  className="form-label inline-block mb-2 text-gray-700">Email address</label>
       <input type="email" className="form-control block w-full px-3
         py-1.5
         text-base
@@ -28,11 +28,10 @@ const LoginForm = () => {
         transition
         ease-in-out
         m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputEmail2"
-        aria-describedby="emailHelp" placeholder="Enter email" />
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-describedby="emailHelp" placeholder="Enter email" />
     </div>
     <div className="form-group mb-6">
-      <label for="exampleInputPassword2" className="form-label inline-block mb-2 text-gray-700">Password</label>
+      <label  className="form-label inline-block mb-2 text-gray-700">Password</label>
       <input type="password" className="form-control block
         w-full
         px-3
@@ -46,10 +45,9 @@ const LoginForm = () => {
         transition
         ease-in-out
         m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputPassword2"
-        placeholder="Password" />
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Password" />
     </div>   
-    <button type="submit" className="
+    <button  className="
       w-full
       px-6
       py-2.5

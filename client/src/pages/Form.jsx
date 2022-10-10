@@ -2,15 +2,15 @@ import React from 'react'
 import Header from '../components/Header'
 import UserForm from '../components/UserForm'
 import UserStatics from '../components/UserStatics'
-import UserDashboard from '../components/UserDashboard'
+import Sidebar from '../components/Sidebar'
 
-const Driver = () => {
+const Form = () => {
   return (
     
     <div className="h-screen flex flex-row justify-start">
-      <UserDashboard />
+      <Sidebar />
       <div className="h-screen flex-auto overflow-auto">
-        <Header />
+        <Header header={'Form'}/>
        <div className='flex items-center mt-6 justify-center'>
          <UserForm />
        </div>
@@ -23,4 +23,4 @@ const Driver = () => {
   )
 }
 
-export default Driver
+export default Form

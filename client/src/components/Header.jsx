@@ -1,22 +1,10 @@
 import React from 'react'
 
-const Header = () => {
+const Header = ({header}) => {
   return (
-    <div className="block p-6 rounded-lg shadow-lg bg-white lg:w-full" >
-        <div className='grid grid-cols-3 gap-0'>
-          <div>
-           <p className="text-gray-800 mt-6 font-bold ">Name: <span className="text-blue-600 hover:text-blue-700 cursor-pointer text-base transition " >Driver Name</span>
-           </p>
-          </div>
-          <div>
-           <p className="text-gray-800 mt-6 font-bold ">Name: <span className="text-blue-600 hover:text-blue-700 cursor-pointer text-base transition " >Driver Name</span>
-           </p>
-          </div>
-          <div>
-           <p className="text-gray-800 mt-6 font-bold ">Name: <span className="text-blue-600 hover:text-blue-700 cursor-pointer text-base transition " >Driver Name</span>
-           </p>
-          </div>
-          
+    <div className="block p-6 rounded-lg shadow-lg bg-gray-800 text-slate-50 lg:w-full" >        
+        <div className='flex items-center  justify-center'>
+          <h1 className=' text-2xl font-bold'>{header}</h1>
         </div>
     </div>
   )
