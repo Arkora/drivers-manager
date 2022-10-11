@@ -1,22 +1,61 @@
 import User from "../models/User.js";
+import bcrypt from 'bcrypt'
+import Car from "../models/Car.js";
 
 export const register = async(req,res) =>{
+    
     const {firstname,lastname,email,password} = req.body 
+    const encryptedPassword = await bcrypt.hash(password, 10)
     try {
-
-        const user = new User({firstname,lastname,email,password})
+        
+        const user = new User({firstname,lastname,email,password:encryptedPassword})
             await user.save()
-            res.status(201).send("User created")
+            res.status(201).send({message:"Signup Successfull"})
         
     } catch (error) {
-        console.log(error)
+        res.status(409).send({message:"Email Already exists"})
     }   
-    //console.log(firstname +" "+ lastname +" "+ email +" "+ password )
+    
     
 }
 
 export const login = async (req,res) =>{
     const {email,password} = req.body
-    res.status(200).send(email)
+    
+    try{
+        const user = await User.findOne({email}).populate('cars')
+        if(!user) return res.status(404).send({ message: "User doesn't exist" })
+
+        const isPasswordCorrect = await bcrypt.compare(password, user.password)
+
+        if (!isPasswordCorrect) return res.status(400).send({ message: "Invalid Password" })
+        
+
+        const userDetails = {id:user._id,firstname:user.firstname,lastname:user.lastname,role:user.role,cars:user.cars}
+        res.status(200).send(userDetails) 
+    }catch(error){
+        res.status(404).send({message:error.message})
+    }
+}
+
+export const getUser = async(req,res) =>{
+
+    const {id} = req.params
+    
+    try{
+        const cars = []
+        const user = await User.findById(id).populate({ path: 'cars', populate: { path: 'metrics' }})
+        user.cars.forEach(async car => {
+            const data = await Car.findById(car._id).populate('metrics')            
+            console.log(data)
+            cars.concat(data)
+        });
+        const userDetails = {id:user._id,firstname:user.firstname,lastname:user.lastname,role:user.role,cars:user.cars}
+        res.status(200).send(userDetails) 
+        console.log(cars)
+    }catch(error){
+        res.status(404).send({message:error.message})
+    }
+
 }
 
