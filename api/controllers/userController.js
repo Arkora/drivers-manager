@@ -43,16 +43,11 @@ export const getUser = async(req,res) =>{
     const {id} = req.params
     
     try{
-        const cars = []
-        const user = await User.findById(id).populate({ path: 'cars', populate: { path: 'metrics' }})
-        user.cars.forEach(async car => {
-            const data = await Car.findById(car._id).populate('metrics')            
-            console.log(data)
-            cars.concat(data)
-        });
+        
+        const user = await User.findById(id).populate({ path: 'cars', populate: { path: 'metrics' }})        
         const userDetails = {id:user._id,firstname:user.firstname,lastname:user.lastname,role:user.role,cars:user.cars}
         res.status(200).send(userDetails) 
-        console.log(cars)
+        
     }catch(error){
         res.status(404).send({message:error.message})
     }
