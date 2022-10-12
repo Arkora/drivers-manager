@@ -1,26 +1,20 @@
 import React from 'react'
 
-const Accordion = () => {
+const Accordion = ({car}) => {
   return (
     <div className=" bg-white border mb-2 border-gray-200">
     <h2 className="mb-0" >
-      <button className="        
-        relative
-        flex
-        items-center
-        w-full
-        py-4
-        px-5
-        text-base text-gray-800 text-left
-        bg-white
-        border-0
-        rounded-none
-        transition
-        focus:outline-none
-      " type="button" >
-        Accordion Item #1
-      </button>
+      {car.plate}
     </h2>
+    {car.metrics.length? (car.metrics.map((metric)=>{
+      return(
+        <div>
+          <h2>{metric.km}</h2>
+          <h2>{metric.total}</h2>
+          <h2>{metric.litres}</h2>
+        </div>
+      )
+    })) : <></>}
     </div>
   )
 }

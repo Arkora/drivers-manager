@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from 'bcrypt'
 import Car from "../models/Car.js";
+import { model } from "mongoose";
 
 export const register = async(req,res) =>{
     
@@ -44,7 +45,7 @@ export const getUser = async(req,res) =>{
     
     try{
         
-        const user = await User.findById(id).populate({ path: 'cars', populate: { path: 'metrics' }})        
+         const user = await User.findById(id).populate({ path: 'cars',model:'Car',select:'plate metrics', populate: { path: 'metrics', model:'Metrics',select:"km total litres" }})                        
         const userDetails = {id:user._id,firstname:user.firstname,lastname:user.lastname,role:user.role,cars:user.cars}
         res.status(200).send(userDetails) 
         

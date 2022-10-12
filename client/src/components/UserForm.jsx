@@ -50,7 +50,7 @@ useEffect(() => {
 
 }, [formErrors])
 
-  console.log(formData)
+  
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white md:w-5/6 lg:w-5/6">
       <p  className={err ? "text-red-400 font-bold" : "hidden"} aria-live="assertive">{err}</p>

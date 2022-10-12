@@ -15,7 +15,7 @@ const CarForm = () => {
       const {data} = await addCar(formData)
       setRes(data.message)
       const response = await fetchUser(user.id)
-      setUser(response.data)     
+      setUser(response.data)       
     } catch (error) {
       setErr(error.response.data.message)
     }
@@ -25,15 +25,16 @@ const CarForm = () => {
       const {data} = await deleteCar(id)
       setRes(data.message)
       const response = await fetchUser(user.id)
-      setUser(response.data)     
+      setUser(response.data)         
     } catch (error) {
       setErr(error.response.data.message)
     }
   }
 
+ 
   
   useEffect(()=>{
-    setCars(user.cars)
+    
   },[cars])
   
 
