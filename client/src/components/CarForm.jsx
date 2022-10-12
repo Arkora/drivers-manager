@@ -8,14 +8,16 @@ const CarForm = () => {
   const [res, setRes] = useState("")
   const [err, setErr] = useState("") 
   const [formData, setFormData] = useState({id:user.id,plate:""})
-  const [cars,setCars] = useState([])
+  const [cars,setCars] = useState(user.cars)
+  const [update, setUpdate] = useState(false)
 
   const postCar = async () =>{
     try {
       const {data} = await addCar(formData)
       setRes(data.message)
       const response = await fetchUser(user.id)
-      setUser(response.data)       
+      setUser(response.data)    
+      setUpdate(true)   
     } catch (error) {
       setErr(error.response.data.message)
     }
@@ -25,7 +27,8 @@ const CarForm = () => {
       const {data} = await deleteCar(id)
       setRes(data.message)
       const response = await fetchUser(user.id)
-      setUser(response.data)         
+      setUser(response.data)   
+      setUpdate(true)      
     } catch (error) {
       setErr(error.response.data.message)
     }
@@ -34,19 +37,24 @@ const CarForm = () => {
  
   
   useEffect(()=>{
+
+    if(update){
+      setCars(user.cars)
+      setUpdate(false)
+    }
     
-  },[cars])
+  },[update])
   
 
 
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm ">
-      <p  className={err ? "text-red-400 font-bold" : "hidden"} aria-live="assertive">{err}</p>
-      <p  className={res ? "text-green-400 font-bold" : "hidden"} aria-live="assertive">{res}</p>
+      <p  className={err ? "text-red-400 font-bold " : "hidden"} aria-live="assertive">{err}</p>
+      <p  className={res ? "text-green-400 font-bold " : "hidden"} aria-live="assertive">{res}</p>
       
         {cars.length ? (cars.map((car)=>{
           return(
-            <div className='grid grid-cols-2 gap-1 overflow-y overflow-y-visible h-1/2'>
+            <div className='grid grid-cols-2 gap-1 mb-1 overflow-y overflow-y-visible '>
               <h1>{car.plate}</h1>
               <button className='w-full
       px-6

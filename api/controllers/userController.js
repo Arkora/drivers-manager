@@ -45,7 +45,7 @@ export const getUser = async(req,res) =>{
     
     try{
         
-         const user = await User.findById(id).populate({ path: 'cars',model:'Car',select:'plate metrics', populate: { path: 'metrics', model:'Metrics',select:"km total litres" }})                        
+         const user = await User.findById(id).populate({ path: 'cars',model:'Car',select:'plate metrics', populate: { path: 'metrics', model:'Metrics',select:"km total litres created" }})                        
         const userDetails = {id:user._id,firstname:user.firstname,lastname:user.lastname,role:user.role,cars:user.cars}
         res.status(200).send(userDetails) 
         
