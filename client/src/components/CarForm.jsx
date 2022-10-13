@@ -48,34 +48,36 @@ const CarForm = () => {
 
 
   return (
-    <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm ">
+    <div className="block p-6 rounded-lg shadow-lg  bg-white max-w-sm ">
       <p  className={err ? "text-red-400 font-bold " : "hidden"} aria-live="assertive">{err}</p>
       <p  className={res ? "text-green-400 font-bold " : "hidden"} aria-live="assertive">{res}</p>
-      
-        {cars.length ? (cars.map((car)=>{
-          return(
-            <div className='grid grid-cols-2 gap-1 mb-1 overflow-y overflow-y-visible '>
-              <h1>{car.plate}</h1>
-              <button className='w-full
-      px-6
-      py-2.5
-      bg-blue-600
-      text-white
-      font-medium
-      text-xs
-      leading-tight
-      uppercase
-      rounded
-      shadow-md
-      hover:bg-blue-700 hover:shadow-lg
-      focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-      active:bg-blue-800 active:shadow-lg
-      transition
-      duration-150
-      ease-in-out' onClick={() => delCar(car._id)}>Delete</button>
-            </div>
-          )
-        })):<></>}
+        <div className='overflow-y-auto h-24'>
+
+          {cars.length ? (cars.map((car)=>{
+            return(
+              <div className='grid grid-cols-2 gap-1 mb-1  '>
+                <h1>{car.plate}</h1>
+                <button className='w-full
+        px-6
+        py-2.5
+        bg-blue-600
+        text-white
+        font-medium
+        text-xs
+        leading-tight
+        uppercase
+        rounded
+        shadow-md
+        hover:bg-blue-700 hover:shadow-lg
+        focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+        active:bg-blue-800 active:shadow-lg
+        transition
+        duration-150
+        ease-in-out' onClick={() => delCar(car._id)}>Delete</button>
+              </div>
+            )
+          })):<></>}
+        </div>
 
       
       <div className=" mt-6 mb-6">
