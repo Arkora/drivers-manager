@@ -71,96 +71,28 @@ const SignupForm = () => {
   <form onSubmit={handleSubmit}>
     <div className="grid grid-cols-2 gap-4">
       <div>
-        <input type="text" className="
-          block
-          w-full
-          px-3
-          py-1.5
-          text-base
-          font-normal
-          text-gray-700
-          bg-white bg-clip-padding
-          border border-solid border-gray-300
-          rounded
-          transition
-          ease-in-out
-          m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+        <input type="text" className="input" 
            placeholder="First name" onChange={(e) =>setUser({...user,firstname:e.target.value})}/>
            <p className='text-red-400'>{formErrors.firstname}</p>
       </div>
       <div className="mb-6">
-        <input type="text" className="
-          block
-          w-full
-          px-3
-          py-1.5
-          text-base
-          font-normal
-          text-gray-700
-          bg-white bg-clip-padding
-          border border-solid border-gray-300
-          rounded
-          transition
-          ease-in-out
-          m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+        <input type="text" className="input" 
           placeholder="Last name" onChange={(e) =>setUser({...user,lastname:e.target.value})}/>
           <p className='text-red-400'> {formErrors.lastname}</p>
       </div>
     </div>
     <div className="form-group mb-6">
-      <input type="email" className=" block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+      <input type="email" className=" input" 
         placeholder="Email address" onChange={(e) =>setUser({...user,email:e.target.value})} />
         <p className='text-red-400'>{formErrors.email}</p>
     </div>
     <div className="form-group mb-6">
-      <input type="password" className=" block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+      <input type="password" className=" input" 
         placeholder="Password" required onChange={(e) =>setUser({...user,password:e.target.value})} />
         <p className='text-red-400'>{formErrors.password}</p>
     </div>
     
-    <button  className="
-      w-full
-      px-6
-      py-2.5
-      bg-blue-600
-      text-white
-      font-medium
-      text-xs
-      leading-tight
-      uppercase
-      rounded
-      shadow-md
-      hover:bg-blue-700 hover:shadow-lg
-      focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-      active:bg-blue-800 active:shadow-lg" onClick={() => setIsSubmit(true)}>Sign up</button>
+    <button  className="customButton w-full" onClick={() => setIsSubmit(true)}>Sign up</button>
       <p className="text-gray-800 mt-6 text-center">Already a member? <Link to={'/'}><span className="text-blue-600 hover:text-blue-700 cursor-pointer text-base transition " >Login</span></Link>
     </p>
   </form>

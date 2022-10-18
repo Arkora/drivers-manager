@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import moment from 'moment'
 import {IoIosArrowDropdownCircle} from 'react-icons/io'
+import {FaRoad,FaGasPump} from 'react-icons/fa'
+import {RiMoneyEuroCircleFill} from 'react-icons/ri'
 
 const Accordion = ({metric}) => {
   const [expand, setExpand] = useState(false)  
@@ -13,9 +15,25 @@ const Accordion = ({metric}) => {
             </div>
           </div>
           <div className={expand?'grid sm"grid-col-1 mt-2 md:grid-cols-3 bg-gray-500 rounded-lg mb-2 py-2 px-6':'hidden'}>
-            <h2>Km: {metric.km}</h2>
-            <h2>Total: {metric.total}$</h2>
-            <h2> {metric.litres}L</h2>
+            <div className='md:grid md:grid-cols-2  md:gap-2'>
+              <div className='md:flex md:justify-end '>
+                <FaRoad size={20}  />
+              </div>
+              <h2>{metric.km}Km</h2>
+            </div>
+
+            <div className='md:grid md:grid-cols-2 md:gap-2' >
+              <div className='md:flex md:justify-end '>
+                <RiMoneyEuroCircleFill size={20}  />
+              </div>
+              <h2>{metric.total}&euro;</h2>
+            </div>
+            <div className='md:grid md:grid-cols-2 md:gap-2'>
+              <div className='md:flex md:justify-end '>
+                <FaGasPump size={20} />
+              </div>
+              <h2>{metric.litres}L</h2>
+            </div>
           </div>
         </div>
       )

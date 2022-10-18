@@ -1,15 +1,28 @@
 import React,{useState,useEffect} from 'react'
 import Header from '../components/Header'
 import UserForm from '../components/UserForm'
-import UserStatics from '../components/UserStatics'
+import CarAccordion from '../components/CarAccordion'
 import Sidebar from '../components/Sidebar'
-import { getUser } from '../localStorage'
+import { getUser,setUser } from '../localStorage'
+import { fetchUser } from '../api'
 
 const Form = () => {
   const user = getUser()
   const [cars, setCars] = useState([])
+
+  const fetchData = async () =>{
+    try {
+      const {data} = await fetchUser(user.id)
+      setUser(data)
+      setCars(data.cars)
+    } catch (error) {
+      console.log(error.response.data.message)
+    }
+  }
+
+  
   useEffect(()=>{
-    setCars(user.cars)
+    fetchData()   
   },[])
   
   return (
@@ -23,11 +36,11 @@ const Form = () => {
        </div>
        <div className='flex items-center  mt-6 justify-center '>
         <div className="block  p-6 rounded-lg shadow-lg bg-white h-screen w-4/5 overflow-auto ">
-          <h1 className='mb-2  flex text-4xl font-bold justify-center'> Cars Statistics </h1>       
+          <h1 className='mb-2  flex text-4xl font-bold justify-center'> CARS STATISTICS </h1>       
           <div className=' h-4/5 pt-6 rounded-xl px-4 overflow-y-auto'>
           {cars.length? (cars.map((car)=>{
             return(
-              <UserStatics car={car} />
+              <CarAccordion car={car} />
             )
           })):<></>}
 

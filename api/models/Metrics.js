@@ -5,6 +5,7 @@ const metricSchema = mongoose.Schema({
   total: { type: Number, required:  true },
   litres: { type: Number, required:  true },
   created:  { type: Date, default:  Date.now}
+ 
 });
 
 export default mongoose.model("Metrics", metricSchema);
