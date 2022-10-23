@@ -1,22 +1,30 @@
 import React,{useState,useEffect} from 'react'
-import { addCar, deleteCar,fetchUser } from '../api'
-import { getUser,setUser } from '../localStorage'
+import { addCar, deleteCar, getCars } from '../api'
+
 
 
 const CarForm = () => {
-  const user = getUser()  
+ 
   const [res, setRes] = useState("")
   const [err, setErr] = useState("") 
-  const [formData, setFormData] = useState({id:user.id,plate:""})
-  const [cars,setCars] = useState(user.cars)
+  const [formData, setFormData] = useState({plate:""})
+  const [cars,setCars] = useState([])
   const [update, setUpdate] = useState(false)
+
+  const fetchCars = async () =>{
+    try {
+      const {data} = await getCars()
+      setCars(data)
+    } catch (error) {
+      setErr(error.response.data.message)
+    }
+  }
 
   const postCar = async () =>{
     try {
       const {data} = await addCar(formData)
-      setRes(data.message)
-      const response = await fetchUser(user.id)
-      setUser(response.data)    
+      setRes(data.message)  
+      await fetchCars()   
       setUpdate(true)   
     } catch (error) {
       setErr(error.response.data.message)
@@ -25,21 +33,23 @@ const CarForm = () => {
   const delCar = async (id) =>{
     try {
       const {data} = await deleteCar(id)
-      setRes(data.message)
-      const response = await fetchUser(user.id)
-      setUser(response.data)   
+      setRes(data.message) 
+      await fetchCars()
       setUpdate(true)      
     } catch (error) {
       setErr(error.response.data.message)
     }
   }
 
+  
  
   
   useEffect(()=>{
 
+    fetchCars()
+
     if(update){
-      setCars(user.cars)
+      fetchCars()
       setUpdate(false)
     }
     

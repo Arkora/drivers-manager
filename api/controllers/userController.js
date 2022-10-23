@@ -26,7 +26,7 @@ export const login = async (req,res) =>{
     const {email,password} = req.body
     
     try{
-        const user = await User.findOne({email}).populate('cars')
+        const user = await User.findOne({email})
         if(!user) return res.status(404).send({ message: "User doesn't exist" })
 
         const isPasswordCorrect = await bcrypt.compare(password, user.password)
@@ -34,7 +34,7 @@ export const login = async (req,res) =>{
         if (!isPasswordCorrect) return res.status(400).send({ message: "Invalid Password" })
         
 
-        const userDetails = {id:user._id,firstname:user.firstname,lastname:user.lastname,role:user.role,cars:user.cars}
+        const userDetails = {id:user._id,firstname:user.firstname,lastname:user.lastname,role:user.role}
         res.status(200).send(userDetails) 
     }catch(error){
         res.status(404).send({message:error.message})

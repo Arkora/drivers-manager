@@ -1,14 +1,25 @@
 import React,{useState,useEffect} from 'react'
-import { getUser,setUser} from '../localStorage'
-import { addValues,fetchUser } from '../api'
+import { getUser} from '../localStorage'
+import { addValues,getCars } from '../api'
 
 
 const UserForm = () => {
   const user = getUser()
-  const [formData, setFormData] = useState({id:"",km:0,total:0,litres:0})
+  const [formData, setFormData] = useState({user_id:user._id,km:0,total:0,litres:0})
   const [formErrors, setFormErrors] = useState({})
   const [submit, setSubmit] = useState(false)   
   const [err, setErr] = useState("")
+  const [cars,setCars] = useState([])
+
+
+  const fetchCars = async () =>{
+    try {
+      const {data} = await getCars()
+      setCars(data)
+    } catch (error) {
+      setErr(error.response.data.message)
+    }
+  }
 
   const handleSubmit =  async(e) => {
     e.preventDefault();
@@ -20,9 +31,8 @@ const UserForm = () => {
 
   const postValues = async () =>{
     try {
-      await addValues(formData)      
-      const response = await fetchUser(user.id)
-      setUser(response.data)
+      await addValues(formData)   
+      
     } catch (error) {
       setErr(error.response.data.message)
     }
@@ -47,6 +57,7 @@ const UserForm = () => {
   return errors;   
 };
 useEffect(() => { 
+fetchCars()
 
 }, [formErrors])
 
@@ -75,7 +86,7 @@ useEffect(() => {
             <select type="text" className="customSelect" 
             placeholder="Plate" onChange={(e) =>setFormData({...formData,id:e.target.value})} >
               <option value={""} selected ></option>
-              {user.cars.length?(user.cars.map((car)=>{
+              {cars.length?(cars.map((car)=>{
               return(<option value={car._id}>{car.plate}</option>)
             })):<></>}</select>
             <p className='text-red-400'>{formErrors.plate}</p>

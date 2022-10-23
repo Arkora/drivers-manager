@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import UserForm from '../components/UserForm'
 import CarAccordion from '../components/CarAccordion'
 import Sidebar from '../components/Sidebar'
-import { getUser,setUser } from '../localStorage'
+import { getUser} from '../localStorage'
 import { fetchUser } from '../api'
 
 const Form = () => {
@@ -13,8 +13,8 @@ const Form = () => {
   const fetchData = async () =>{
     try {
       const {data} = await fetchUser(user.id)
-      setUser(data)
       setCars(data.cars)
+      console.log(data.cars)
     } catch (error) {
       console.log(error.response.data.message)
     }
@@ -24,6 +24,7 @@ const Form = () => {
   useEffect(()=>{
     fetchData()   
   },[])
+  
   
   return (
     

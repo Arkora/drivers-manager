@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { FaPowerOff } from 'react-icons/fa'
 import { MdSettings, MdDashboard} from 'react-icons/md'
 import {BsFillArrowLeftCircleFill,BsInboxFill,BsFillPersonFill,BsBarChartLineFill} from 'react-icons/bs'
@@ -13,6 +13,7 @@ import { getUser,setUser } from '../localStorage'
 const Sidebar = () => {
     
     const [open, setOpen] = useState(false);
+    const [isUser,setIsUser] =useState(true)
     const user = getUser()
     const navigate = useNavigate()
 
@@ -21,6 +22,11 @@ const Sidebar = () => {
       navigate('/')
 
     }
+
+    useEffect(()=>{
+      if(user.role === "admin")
+      setIsUser(false)
+    })
 
     
 
@@ -41,31 +47,31 @@ const Sidebar = () => {
             </li>          
           </Link>
           <Link to='/inbox'>
-            <li className={`flex  rounded-md p-2 cursor-pointer hover:bg-slate-200 text-slate-50 hover:text-black text-sm items-center gap-x-4`}>
+            <li className={isUser?`flex  rounded-md p-2 cursor-pointer hover:bg-slate-200 text-slate-50 hover:text-black text-sm items-center gap-x-4`:'hidden'}>
               <BsInboxFill size={20} />
               <span className={`${!open && "hidden"} origin-left duration-200`}>Inbox</span>
             </li>
           </Link>
           <Link to='/form'>
-            <li className={`flex  rounded-md p-2 mt-6 cursor-pointer hover:bg-slate-200 text-slate-50 hover:text-black text-sm items-center gap-x-4`}>
+            <li className={isUser?`flex  rounded-md p-2 mt-6 cursor-pointer hover:bg-slate-200 text-slate-50 hover:text-black text-sm items-center gap-x-4`:'hidden'}>
               <AiOutlineForm size={20} />
               <span className={`${!open && "hidden"} origin-left duration-200`}>Form</span>
             </li>
           </Link>
           <Link to='/car'>
-            <li className={`flex  rounded-md p-2  cursor-pointer hover:bg-slate-200 text-slate-50 hover:text-black text-sm items-center gap-x-4`}>
+            <li className={isUser?'hidden':`flex  rounded-md p-2  cursor-pointer hover:bg-slate-200 text-slate-50 hover:text-black text-sm items-center gap-x-4`}>
               <AiFillCar size={20} />
               <span className={`${!open && "hidden"} origin-left duration-200`}>Car Form</span>
             </li>
           </Link>
           <Link to='/profile'>
-            <li className={`flex  rounded-md p-2 mt-6 cursor-pointer hover:bg-slate-200 text-slate-50 hover:text-black text-sm items-center gap-x-4`}>
+            <li className={isUser?`flex  rounded-md p-2 mt-6 cursor-pointer hover:bg-slate-200 text-slate-50 hover:text-black text-sm items-center gap-x-4`:'hidden'}>
               <BsFillPersonFill size={20} />
               <span className={`${!open && "hidden"} origin-left duration-200`}>Profile</span>
             </li>
           </Link>
           <Link to='/reports'>
-            <li className={`flex  rounded-md p-2 cursor-pointer hover:bg-slate-200 text-slate-50 hover:text-black text-sm items-center gap-x-4`}>
+            <li className={isUser?'hidden':`flex  rounded-md p-2 cursor-pointer hover:bg-slate-200 text-slate-50 hover:text-black text-sm items-center gap-x-4`}>
               <BsBarChartLineFill size={20} />
               <span className={`${!open && "hidden"} origin-left duration-200`}>Reports</span>
             </li>

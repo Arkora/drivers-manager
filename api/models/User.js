@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
   role:     { type: String, required: true, default: 'user'},
   created:  { type: Date, default:  Date.now},
-  cars: [{ type:mongoose.Schema.Types.ObjectId, ref:"Car" }] 
+   
 });
 
 

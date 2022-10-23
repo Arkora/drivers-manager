@@ -7,6 +7,7 @@ import {RiMoneyEuroCircleFill} from 'react-icons/ri'
 const CarAccordion = ({car}) => {
   
     const [expand, setExpand] = useState(false)
+    
 
   return (
           <div className=" bg-gray-800 text-slate-50 rounded-sm p-2 border-2 font-bold my-4 border-gray-200">
