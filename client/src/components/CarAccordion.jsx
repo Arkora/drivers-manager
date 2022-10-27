@@ -4,7 +4,7 @@ import {IoIosArrowDropdownCircle} from 'react-icons/io'
 import {FaRoad,FaGasPump} from 'react-icons/fa'
 import {RiMoneyEuroCircleFill} from 'react-icons/ri'
 
-const CarAccordion = ({car}) => {
+const CarAccordion = ({car,setUpdate}) => {
   
     const [expand, setExpand] = useState(false)
     
@@ -19,7 +19,7 @@ const CarAccordion = ({car}) => {
             </div>
             <div className={expand? 'visible':'hidden'}>
               {car.metrics.length? (car.metrics.map((metric)=>{
-                return(<MetricsAccordion metric={metric}/>)
+                return(<MetricsAccordion metric={metric} setUpdate={setUpdate}/>)
               })) :<></>}
             </div>
             <div className={expand && car.total>0? 'visible  p-2':'hidden'}>

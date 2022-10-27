@@ -1,8 +1,6 @@
 import User from "../models/User.js";
 import bcrypt from 'bcrypt'
-import Car from "../models/Car.js";
-import Metrcis from '../models/Metrics.js'
-import mongoose, { model } from "mongoose";
+
 
 
 export const register = async(req,res) =>{

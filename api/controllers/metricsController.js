@@ -41,3 +41,24 @@ export const addValue = async (req,res) =>{
     }
 
 }
+
+export const deleteMetric = async(req,res) =>{
+    const {id} = req.params
+    try {
+        await Metrics.findByIdAndDelete(id)
+        res.status(200).send({message:"Deleted"})
+    } catch (error) {
+        res.send(409).send({message:error})
+    }
+}
+
+export const updateMetric = async(req,res) =>{
+    const {id} = req.params
+    const {km,total,litres} = req.body
+    try {
+       const updated =  await Metrics.findByIdAndUpdate(id,{km:km,total:total,litres:litres})
+       res.send(200).send(updated)
+    } catch (error) {
+        res.send(409).send({message:error})
+    }
+}

@@ -42,7 +42,7 @@ export const getDriverReports = async (req,res) =>{
                 '$project':{
                     "_id":1,
                     "plate":1,
-                    "metrics":{'_id':1,'km':1,'total':1,'litres':1},
+                "metrics":{'_id':1,'km':1,'total':1,'litres':1,'created':1},
                     'total':1,
                     'Km':1,
                     'litres':1
