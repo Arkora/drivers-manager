@@ -1,6 +1,6 @@
 # Driver Manager
 
-## Techhologies 
+## Technologies 
 ######  MongoDB, Express, React Js, Node Js
 ###### Axios, Tailwind
 
